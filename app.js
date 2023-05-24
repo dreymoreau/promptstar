@@ -6,8 +6,9 @@ const morgan = require('morgan')
 const exphbs = require('express-handlebars')
 const passport = require('passport')
 const session = require('express-session')
-const MongoStore = require('connect-mongo')
 const connectDB = require('./config/db')
+const MongoStore = require('connect-mongo')
+
 
 // LOAD CONFIG where to find env file
 dotenv.config({path: './config/config.env'})
@@ -30,11 +31,8 @@ if(process.env.NODE_ENV === 'development') {
 
 // middleware for Handlebars
 // extra engine word needed after exphbs to remove error
-app.engine('.hbs', exphbs.engine({
-    // wraps around the pages by default, extra pages can be added in after
-    defaultLayout: 'main', 
-    extname: '.hbs'
-    })
+ // wraps around the pages by default, extra pages can be added in after
+app.engine('.hbs', exphbs.engine({defaultLayout: 'main', extname: '.hbs'})
 )
 // creating views engine to use handlebars
 app.set('view engine', '.hbs')
@@ -43,10 +41,7 @@ app.set('view engine', '.hbs')
 app.use(session({
         secret: 'keyboard cat',
         resave: false,
-        saveUninitialized: false,
-        store: MongoStore.create({
-            mongoUrl: process.env.MONGO_URI
-      })    
+        saveUninitialized: false    
     })
 )
 

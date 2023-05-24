@@ -4,10 +4,7 @@ const mongoose = require('mongoose')
 const connectDB = async () => {
     try {
         //! Additional properties no longer needed
-        const conn = await mongoose.connect(process.env.MONGO_URI, {
-            useNewUrlParser: true,
-            useUnifiedTopology: true
-        })
+        const conn = await mongoose.connect(process.env.MONGO_URI)
 
         // if successful console.log
         console.log(`MongoDB Connected ${conn.connection.host}`)
