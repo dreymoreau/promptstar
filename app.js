@@ -6,8 +6,9 @@ const morgan = require('morgan')
 const exphbs = require('express-handlebars')
 const passport = require('passport')
 const session = require('express-session')
-const connectDB = require('./config/db')
 const MongoStore = require('connect-mongo')
+const connectDB = require('./config/db')
+
 
 
 // LOAD CONFIG where to find env file
@@ -21,6 +22,11 @@ connectDB()
 
 const app = express()
 
+// Body parser middleware
+
+app.use(express.urlencoded({extended: false}))
+app.use(express.json())
+
 app.use(express.urlencoded({ extended: false }))
 app.use(express.json())
 
@@ -29,10 +35,20 @@ if(process.env.NODE_ENV === 'development') {
     app.use(morgan('dev'))
 }
 
+// Handlebars helpers
+
+const { formatDate } = require('./helpers/hbs')
+
 // middleware for Handlebars
 // extra engine word needed after exphbs to remove error
  // wraps around the pages by default, extra pages can be added in after
-app.engine('.hbs', exphbs.engine({defaultLayout: 'main', extname: '.hbs'})
+app.engine('.hbs', exphbs.engine({
+    helpers: {
+        formatDate,
+    },
+    defaultLayout: 'main', 
+    extname: '.hbs'
+    })
 )
 // creating views engine to use handlebars
 app.set('view engine', '.hbs')
@@ -41,7 +57,10 @@ app.set('view engine', '.hbs')
 app.use(session({
         secret: 'keyboard cat',
         resave: false,
-        saveUninitialized: false    
+        saveUninitialized: false,
+        store: MongoStore.create({
+            mongoUrl: process.env.MONGO_URI
+        }) 
     })
 )
 
@@ -55,6 +74,7 @@ app.use(express.static(path.join(__dirname, 'public')))
 // Routes
 app.use('/', require('./routes/index'))
 app.use('/auth', require('./routes/auth'))
+app.use('/stories', require('./routes/stories'))
 
 const PORT = process.env.PORT || 8500
 
