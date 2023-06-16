@@ -1,0 +1,30 @@
+<h1>Stories</h1>
+<div class="row">
+    {{#each stories}}
+        <div class="col s12 m4">
+            <div class="card">
+                <div class="card-image">
+                    {{!-- user is for the stories user because we are inside of the loop --}}
+                    {{!-- triple curly braces to bring in html tags --}}
+                    {{{editIcon user ../user _id}}}
+                </div>
+                <div class="card-content center-align">
+                    <h5>{{title}}</h5>
+                    {{!-- 150 is coming from hbs.js len inside of the truncate function --}}
+                    <p>{{stripTags (truncate body 150)}}</p>
+                    <br>
+                    {{!-- chip shows who the user is that created the story, shows image and is a click link too --}}
+                    <div class="chip">
+                        <img src="{{user.image}}" alt="">
+                        <a href="/stories/user/{{user._id}}">{{user.displayName}}</a>
+                    </div>
+                </div>
+                <div class="card-action center-align">
+                    <a href="/stories/{{_id}}" class="btn grey">Read more</a>
+                </div>
+            </div>
+        </div>
+    {{else}}
+        <p>No stories to display</p>
+    {{/each}}
+</div>

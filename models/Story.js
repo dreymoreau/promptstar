@@ -18,7 +18,9 @@ const StorySchema = new mongoose.Schema({
     // connecting user to unique ObjectId to make sure its always protected for separate accounts
     user: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "User"
+        ref: "User",
+        // adding this field should be required because the app will break if the user is not present
+        required: true
     },
     createdAt: {
         type: Date,
