@@ -17,6 +17,6 @@ Implement TailwindCSS to enhance design and styling.
 ## Lessons Learned:
 
 I learned how to implement handlebars for the frontend, while using Node, Express, MongoDB for the backend. It allowed me to practice MVC design structure as
-well as ensuring that the routes, controllers, models and middleware all communicated with each other properly. This project also uses Google Authentication 
-which caused some issues at first. I was able to set it up so everytime I logged out from the dashboard and tried logging back in, it would bring me to the
-Google Auth page to sign me back in, which it wasn't doing for some time and I couldn't figure out why, until I was able to.
+well as ensuring that the routes, controllers, models and middleware all communicated with each other properly.
+
+This project also uses Google Authentication which caused some issues at first. I was able to set it up so everytime I logged out from the dashboard and tried logging back in, it would bring me to the Google Auth page to sign me back in, which it wasn't doing for some time and I couldn't figure out why, until I was able to. Lastly something else that I learned through this project was implementing environment variables through Railway, since when pushing this project to Github then deploying to Railway through the repo, the .env file with all the environment variables was not pushed to Github.
