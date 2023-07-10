@@ -1,4 +1,4 @@
-# Promptstar
+# promptstar
 This project is a journal blog to create public or private posts, using Google Authentication for Users.
 
 ## How It's Made:
