@@ -1,8 +1,6 @@
 # Promptstar
 This project is a journal blog to create public or private posts, using Google Authentication for Users.
 
-Link to project: https://promptstar.up.railway.app
-
 ## How It's Made:
 
 **Tech used:** JavaScript, CSS, Handlebars, Node, Express, MongoDB
